@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BXQmQOp4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_BXRNWOp4EeO1NKAyXur4AQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_BXRNUOp4EeO1NKAyXur4AQ" label="com.opcoach.ecf14.eap" width="500" height="400">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_BXRNUOp4EeO1NKAyXur4AQ" label="com.opcoach.ecf14.eap" width="600" height="500">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_BXR0ZOp4EeO1NKAyXur4AQ">
       <children xsi:type="advanced:Perspective" xmi:id="_BXR0Zep4EeO1NKAyXur4AQ">
         <children xsi:type="basic:PartSashContainer" xmi:id="_BXR0Zup4EeO1NKAyXur4AQ">
