@@ -17,5 +17,6 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.nebula.visualization.widgets,
  org.eclipse.draw2d,
  org.eclipse.nebula.visualization.xygraph,
- com.opcoach.ecf2014.engine.core;bundle-version="1.0.0"
+ com.opcoach.ecf2014.engine.core;bundle-version="1.0.0",
+ com.opcoach.ecf2014.engine.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
