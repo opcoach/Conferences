@@ -22,6 +22,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
+import com.opcoach.ecf2014.engine.core.EngineWatcher;
 import com.opcoach.ecf2014.engine.core.EngineSimulator;
 
 public class DashBoard
@@ -36,9 +37,15 @@ public class DashBoard
 	@Inject
 	public DashBoard(MApplication appli)
 	{
+		// We will use the application context to store and inject values.
+		IEclipseContext appliContext = appli.getContext();
+		
 		// Step 5 : create and start Engine.
-		EngineSimulator simu = ContextInjectionFactory.make(EngineSimulator.class, appli.getContext());
-		appli.getContext().set(EngineSimulator.class, simu);
+		EngineSimulator simu = ContextInjectionFactory.make(EngineSimulator.class, appliContext);
+		appliContext.set(EngineSimulator.class, simu);
+		
+		// Step 8 : create the engine alarm watcher
+		EngineWatcher watcher = ContextInjectionFactory.make(EngineWatcher.class, appliContext);
 	}
 
 	@Inject @Optional
@@ -129,7 +136,7 @@ public class DashBoard
 		rpmFigure.setBackgroundColor(gmfactory.getColor(0, 0, 0));
 		rpmFigure.setForegroundColor(gmfactory.getColor(255, 255, 255));
 
-		rpmFigure.setRange(0, 7000);
+		rpmFigure.setRange(0, 8000);
 		rpmFigure.setLoLevel(1000);
 		rpmFigure.setLoloLevel(500);
 		rpmFigure.setHiLevel(4000);

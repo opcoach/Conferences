@@ -45,6 +45,8 @@ public class EngineSimulator {
 	public void stop() {
 		if (timer != null) {
 			timer.cancel();
+			speed = 0;
+			rpm = 0;
 			ctx.set(ECF2014_SPEED_VALUE, 0);
 			ctx.set(ECF2014_RPM_VALUE, 0);
 
@@ -64,8 +66,7 @@ public class EngineSimulator {
 			if (rpm < 0)
 				rpm = 0;
 
-			System.out.println("New value for speed : " + speed + " and rpm : "
-					+ rpm);
+			System.out.println("New value for speed : " + speed + " and rpm : "+ rpm);
 			ctx.set(ECF2014_SPEED_VALUE, speed);
 			ctx.set(ECF2014_RPM_VALUE, rpm);
 		}
