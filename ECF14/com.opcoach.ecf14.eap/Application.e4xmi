@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BXQmQOp4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_BXRNWOp4EeO1NKAyXur4AQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_BXRNUOp4EeO1NKAyXur4AQ" label="com.opcoach.ecf14.eap" width="600" height="575">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_BXRNUOp4EeO1NKAyXur4AQ" label="com.opcoach.ecf14.eap" width="600" height="800">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_BXR0ZOp4EeO1NKAyXur4AQ">
       <children xsi:type="advanced:Perspective" xmi:id="_BXR0Zep4EeO1NKAyXur4AQ">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_BXR0Zup4EeO1NKAyXur4AQ">
-          <children xsi:type="basic:PartStack" xmi:id="_BXR0Z-p4EeO1NKAyXur4AQ" containerData="12700">
-            <children xsi:type="basic:Part" xmi:id="_BXR0aOp4EeO1NKAyXur4AQ" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.parts.DashBoard" label="Dashboard"/>
-          </children>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_RmMn4O_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partsashcontainer.0" containerData="7500" horizontal="true">
-            <children xsi:type="basic:PartStack" xmi:id="_TKpdMO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_T4AScO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.part.0" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.EngineControlPart" label="Engine Control"/>
+        <children xsi:type="basic:PartSashContainer" xmi:id="_9sQp4PPoEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.partsashcontainer.top">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_BXR0Zup4EeO1NKAyXur4AQ" containerData="71">
+            <children xsi:type="basic:PartStack" xmi:id="_BXR0Z-p4EeO1NKAyXur4AQ" containerData="12700">
+              <children xsi:type="basic:Part" xmi:id="_BXR0aOp4EeO1NKAyXur4AQ" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.parts.DashBoard" label="Dashboard"/>
             </children>
+            <children xsi:type="basic:PartSashContainer" xmi:id="_RmMn4O_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partsashcontainer.0" containerData="7500" horizontal="true">
+              <children xsi:type="basic:PartStack" xmi:id="_TKpdMO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partstack.0">
+                <children xsi:type="basic:Part" xmi:id="_T4AScO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.part.0" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.EngineControlPart" label="Engine Control"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_DJsi8PPpEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.partstack.1" containerData="29">
+            <children xsi:type="basic:Part" xmi:id="_Dj82APPpEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.part.1" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.AlarmPart" label="Alarms" tooltip=""/>
           </children>
         </children>
       </children>
