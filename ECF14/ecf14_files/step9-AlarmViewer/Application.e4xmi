@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BXQmQOp4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_BXRNWOp4EeO1NKAyXur4AQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_BXRNUOp4EeO1NKAyXur4AQ" label="com.opcoach.ecf14.eap" width="600" height="800">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_BXR0ZOp4EeO1NKAyXur4AQ">
+      <children xsi:type="advanced:Perspective" xmi:id="_BXR0Zep4EeO1NKAyXur4AQ">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_9sQp4PPoEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.partsashcontainer.top">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_BXR0Zup4EeO1NKAyXur4AQ" containerData="71">
+            <children xsi:type="basic:PartStack" xmi:id="_BXR0Z-p4EeO1NKAyXur4AQ" containerData="12700">
+              <children xsi:type="basic:Part" xmi:id="_BXR0aOp4EeO1NKAyXur4AQ" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.parts.DashBoard" label="Dashboard"/>
+            </children>
+            <children xsi:type="basic:PartSashContainer" xmi:id="_RmMn4O_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partsashcontainer.0" containerData="7500" horizontal="true">
+              <children xsi:type="basic:PartStack" xmi:id="_TKpdMO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partstack.0">
+                <children xsi:type="basic:Part" xmi:id="_T4AScO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.part.0" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.EngineControlPart" label="Engine Control"/>
+              </children>
+            </children>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_DJsi8PPpEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.partstack.1" containerData="29">
+            <children xsi:type="basic:Part" xmi:id="_Dj82APPpEeOmzqQGXNLsmg" elementId="com.opcoach.ecf14.eap.part.1" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.AlarmPart" label="Alarms" tooltip=""/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_BXRNaOp4EeO1NKAyXur4AQ" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_BXRNaep4EeO1NKAyXur4AQ" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_BXRNaup4EeO1NKAyXur4AQ" label="Open" iconURI="platform:/plugin/com.opcoach.ecf14.eap/icons/sample.png" command="_BXRNX-p4EeO1NKAyXur4AQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_BXR0YOp4EeO1NKAyXur4AQ" label="Save" iconURI="platform:/plugin/com.opcoach.ecf14.eap/icons/save_edit.png" command="_BXRNYup4EeO1NKAyXur4AQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_BXR0Yep4EeO1NKAyXur4AQ" label="Quit" command="_BXRNW-p4EeO1NKAyXur4AQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_BXR0Yup4EeO1NKAyXur4AQ" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_BXR0Y-p4EeO1NKAyXur4AQ" label="About" command="_BXRNZep4EeO1NKAyXur4AQ"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_BXR0aep4EeO1NKAyXur4AQ">
+      <children xsi:type="menu:ToolBar" xmi:id="_BXR0aup4EeO1NKAyXur4AQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_BXR0a-p4EeO1NKAyXur4AQ" iconURI="platform:/plugin/com.opcoach.ecf14.eap/icons/sample.png" command="_BXRNX-p4EeO1NKAyXur4AQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_BXSbcOp4EeO1NKAyXur4AQ" iconURI="platform:/plugin/com.opcoach.ecf14.eap/icons/save_edit.png" command="_BXRNYup4EeO1NKAyXur4AQ"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_BXRNXOp4EeO1NKAyXur4AQ" elementId="com.opcoach.ecf14.eap.handler.quitCommand" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.handlers.QuitHandler" command="_BXRNW-p4EeO1NKAyXur4AQ"/>
+  <handlers xmi:id="_BXRNYOp4EeO1NKAyXur4AQ" elementId="com.opcoach.ecf14.eap.handler.openCommand" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.handlers.OpenHandler" command="_BXRNX-p4EeO1NKAyXur4AQ"/>
+  <handlers xmi:id="_BXRNY-p4EeO1NKAyXur4AQ" elementId="com.opcoach.ecf14.eap.handler.saveCommand" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.handlers.SaveHandler" command="_BXRNYup4EeO1NKAyXur4AQ"/>
+  <handlers xmi:id="_BXRNZup4EeO1NKAyXur4AQ" elementId="com.opcoach.ecf14.eap.handler.aboutCommand" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.handlers.AboutHandler" command="_BXRNZep4EeO1NKAyXur4AQ"/>
+  <bindingTables xmi:id="_BXRNXep4EeO1NKAyXur4AQ" bindingContext="_BXRNWOp4EeO1NKAyXur4AQ">
+    <bindings xmi:id="_BXRNXup4EeO1NKAyXur4AQ" keySequence="M1+Q" command="_BXRNW-p4EeO1NKAyXur4AQ"/>
+    <bindings xmi:id="_BXRNYep4EeO1NKAyXur4AQ" keySequence="M1+O" command="_BXRNX-p4EeO1NKAyXur4AQ"/>
+    <bindings xmi:id="_BXRNZOp4EeO1NKAyXur4AQ" keySequence="M1+S" command="_BXRNYup4EeO1NKAyXur4AQ"/>
+    <bindings xmi:id="_BXRNZ-p4EeO1NKAyXur4AQ" keySequence="M1+A" command="_BXRNZep4EeO1NKAyXur4AQ"/>
+  </bindingTables>
+  <rootContext xmi:id="_BXRNWOp4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_BXRNWep4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_BXRNWup4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_BXRNW-p4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_BXRNX-p4EeO1NKAyXur4AQ" elementId="com.opcoach.ecf14.eap.open" commandName="openCommand"/>
+  <commands xmi:id="_BXRNYup4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_BXRNZep4EeO1NKAyXur4AQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <addons xmi:id="_BXRNUep4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_BXRNUup4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_BXRNU-p4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_BXRNVOp4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_BXRNVep4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_BXRNVup4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_BXRNV-p4EeO1NKAyXur4AQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
