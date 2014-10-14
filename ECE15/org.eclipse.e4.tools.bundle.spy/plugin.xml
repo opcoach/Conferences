@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   <extension point="org.eclipse.e4.tools.spy.spyPart">
+      <spyPart
+            description="Bundle Spy to display all bundles and their states"
+            icon="icons/osgi.png"
+            name="Bundles Spy"
+            part="org.eclipse.e4.tools.bundles.spy.BundleSpyPart"
+            shortcut="M2+M3+F12">
+      </spyPart>
+   </extension>
+</plugin>
