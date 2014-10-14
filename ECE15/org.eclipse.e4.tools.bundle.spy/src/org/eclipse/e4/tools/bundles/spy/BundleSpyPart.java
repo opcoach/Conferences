@@ -10,113 +10,202 @@
  *******************************************************************************/
 package org.eclipse.e4.tools.bundles.spy;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.internal.tools.bundles.spy.BundleDataFilter;
+import org.eclipse.e4.internal.tools.bundles.spy.BundleDataProvider;
 import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Text;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
 /**
- * This class is the main part of the bundle spy. It displays a tableviewer with all bundles
+ * This class is the main part of the bundle spy. It displays a tableviewer with
+ * all bundles
  */
 public class BundleSpyPart
 {
 
-	private static final String ICON_COLLAPSEALL = "icons/collapseall.gif";
-	private static final String ICON_EXPANDALL = "icons/expandall.gif";
 	private static final String ICON_REFRESH = "icons/refresh.gif";
-
-	// The ID for this part descriptor
-	static final String CONTEXT_SPY_VIEW_DESC = "org.eclipse.e4.tools.context.spy.view";
+	public static final String ICON_STATE_ACTIVE = "icons/state_active.gif";
+	public static final String ICON_STATE_RESOLVED = "icons/state_resolved.gif";
 
 	private TableViewer bundlesTableViewer;
 
+	private Text filterText;
 
-	private ImageRegistry imgReg;
+	private Button showOnlyFilteredElements;
 
-/*	@Inject
-	private void initializeImageRegistry()
-	{
-		Bundle b = FrameworkUtil.getBundle(this.getClass());
-		imgReg = new ImageRegistry();
-		imgReg.put(ICON_COLLAPSEALL, ImageDescriptor.createFromURL(b.getEntry(ICON_COLLAPSEALL)));
-		imgReg.put(ICON_EXPANDALL, ImageDescriptor.createFromURL(b.getEntry(ICON_EXPANDALL)));
-		imgReg.put(ICON_REFRESH, ImageDescriptor.createFromURL(b.getEntry(ICON_REFRESH)));
-	} */
+	private BundleDataFilter bundleFilter;
+
+	@Inject
+	private IEclipseContext ctx;
+
+	/** Store the values to set it when it is reopened */
+	private static String lastFilterText = null;
+	private static boolean lastShowFiltered = false;
 
 	/**
 	 * Create contents of the view part.
 	 */
 	@PostConstruct
-	public void createControls(Composite parent, MApplication a, IEclipseContext ctx)
+	public void createControls(Composite parent)
 	{
+		ImageRegistry imgReg = initializeImageRegistry();
+
+		// Set a filter in context (-> null at the begining).
+		bundleFilter = new BundleDataFilter();
+		ctx.set(BundleDataFilter.class, bundleFilter);
+
+		parent.setLayout(new GridLayout(1, false));
+
+		final Composite comp = new Composite(parent, SWT.NONE);
+		comp.setLayout(new GridLayout(5, false));
+
+		Button refreshButton = new Button(comp, SWT.FLAT);
+		refreshButton.setImage(imgReg.get(ICON_REFRESH));
+		refreshButton.setToolTipText("Refresh the contexts");
+		refreshButton.addSelectionListener(new SelectionAdapter()
+			{
+				@Override
+				public void widgetSelected(SelectionEvent e)
+				{
+					bundlesTableViewer.refresh(true);
+				}
+			});
+
+		filterText = new Text(comp, SWT.SEARCH | SWT.ICON_SEARCH);
+		GridDataFactory.fillDefaults().hint(200, SWT.DEFAULT).applyTo(filterText);
+		filterText.setMessage("Search data");
+		filterText.setToolTipText("Highlight the bundles where the contained objects contains this string.\n" + "Case is ignored.");
+		if (lastFilterText != null)
+			filterText.setText(lastFilterText);
+		bundleFilter.setPattern(lastFilterText);
+		filterText.addKeyListener(new KeyAdapter()
+			{
+				@Override
+				public void keyReleased(KeyEvent e)
+				{
+					String textToSearch = filterText.getText();
+					lastFilterText = textToSearch;
+					boolean enableButton = textToSearch.length() > 0;
+					// Enable/disable button for filtering
+					showOnlyFilteredElements.setEnabled(enableButton);
+
+					// Then update filters and viewers
+					bundleFilter.setPattern(textToSearch);
+					setFilter();
+					bundlesTableViewer.refresh(true);
+				}
+
+			});
+
+		showOnlyFilteredElements = new Button(comp, SWT.CHECK);
+		showOnlyFilteredElements.setText("Show Only Filtered");
+		showOnlyFilteredElements.setToolTipText("Show only the filtered items in the bundle table ");
+		showOnlyFilteredElements.setEnabled((lastFilterText != null) && (lastFilterText.length() > 0));
+		showOnlyFilteredElements.setSelection(lastShowFiltered);
+		showOnlyFilteredElements.addSelectionListener(new SelectionAdapter()
+			{
+				@Override
+				public void widgetSelected(SelectionEvent e)
+				{
+					lastShowFiltered = showOnlyFilteredElements.getSelection();
+					setFilter();
+				}
+			});
+
 		// Create the customer table with 2 columns: firstname and name
 		bundlesTableViewer = new TableViewer(parent);
 		final Table cTable = bundlesTableViewer.getTable();
 		cTable.setHeaderVisible(true);
 		cTable.setLinesVisible(true);
-		GridData gd_cTable = new GridData(SWT.FILL);
-		gd_cTable.verticalAlignment = SWT.TOP;
+		GridData gd_cTable = new GridData(SWT.FILL, SWT.FILL, true, true);
+		// gd_cTable.verticalAlignment = SWT.TOP;
 		cTable.setLayoutData(gd_cTable);
-		
-		// Create the first column for firstname
-		TableViewerColumn bundleNameCol = new TableViewerColumn(bundlesTableViewer, SWT.NONE);
-		bundleNameCol.getColumn().setWidth(200);
-		bundleNameCol.getColumn().setText("Bundle Name");
-		bundleNameCol.setLabelProvider(new ColumnLabelProvider() {@Override
-		public String getText(Object element)
-		{
-			return ((Bundle)element).getSymbolicName();
-		}});
-		
-		// Create the second column for name
-		TableViewerColumn nameCol = new TableViewerColumn(bundlesTableViewer, SWT.NONE);
-		nameCol.getColumn().setWidth(200);
-		nameCol.getColumn().setText("Version");
-		nameCol.setLabelProvider(new ColumnLabelProvider() {@Override
-		public String getText(Object element)
-		{
-			return ((Bundle)element).getVersion().toString();
-		}});
-		
+
+		// Create the first column for bundle name
+		addColumn(bundlesTableViewer, 35, "State", BundleDataProvider.COL_STATE);
+		addColumn(bundlesTableViewer, 200, "Bundle Name", BundleDataProvider.COL_NAME);
+		addColumn(bundlesTableViewer, 200, "Version", BundleDataProvider.COL_VERSION);
+
 		// Set input data and content provider (default ArrayContentProvider)
 		bundlesTableViewer.setContentProvider(ArrayContentProvider.getInstance());
-		
+
 		// Get the list of bundles in platform using bundle context...
 		BundleContext bc = BundleSpyActivator.getContext();
 		bundlesTableViewer.setInput(bc.getBundles());
-		
+
+		ColumnViewerToolTipSupport.enableFor(bundlesTableViewer);
 
 	}
 
-	
-
-	@PreDestroy
-	public void dispose()
+	private void addColumn(TableViewer parentTable, int width, String title, int colnum)
 	{
+		TableViewerColumn col = new TableViewerColumn(bundlesTableViewer, SWT.NONE);
+		col.getColumn().setWidth(width);
+		col.getColumn().setText(title);
+
+		BundleDataProvider bdp = ContextInjectionFactory.make(BundleDataProvider.class, ctx);
+		bdp.setColumn(colnum);
+		col.setLabelProvider(bdp);
+
+	}
+
+	private static final ViewerFilter[] NO_FILTER = new ViewerFilter[0];
+
+	/** Set the filter on table */
+	public void setFilter()
+	{
+
+		if (showOnlyFilteredElements.isEnabled() && showOnlyFilteredElements.getSelection())
+		{
+			bundlesTableViewer.setFilters(new ViewerFilter[] { bundleFilter });
+		} else
+		{
+			bundlesTableViewer.setFilters(NO_FILTER);
+		}
 	}
 
 	@Focus
 	public void setFocus()
 	{
 		bundlesTableViewer.getControl().setFocus();
+	}
+
+	private ImageRegistry initializeImageRegistry()
+	{
+		Bundle b = FrameworkUtil.getBundle(this.getClass());
+		ImageRegistry imgReg = new ImageRegistry();
+		imgReg.put(ICON_REFRESH, ImageDescriptor.createFromURL(b.getEntry(ICON_REFRESH)));
+		imgReg.put(ICON_STATE_ACTIVE, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_ACTIVE)));
+		imgReg.put(ICON_STATE_RESOLVED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_RESOLVED)));
+
+		ctx.set(ImageRegistry.class, imgReg);
+
+		return imgReg;
 	}
 
 }
