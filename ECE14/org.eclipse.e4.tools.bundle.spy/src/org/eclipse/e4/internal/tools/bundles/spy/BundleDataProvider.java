@@ -36,17 +36,8 @@ public class BundleDataProvider extends ColumnLabelProvider
 	public static final int COL_VERSION = 1;
 	public static final int COL_STATE = 2;
 
-	private static final String NO_VALUE_COULD_BE_COMPUTED = "No value could be yet computed";
 	private static final Color COLOR_IF_FOUND = Display.getCurrent().getSystemColor(SWT.COLOR_BLUE);
-	private static final Color COLOR_IF_NOT_COMPUTED = Display.getCurrent().getSystemColor(SWT.COLOR_MAGENTA);
-	private static final Object[] EMPTY_RESULT = new Object[0];
-	static final String LOCAL_VALUE_NODE = "Local values managed  by this context";
-	static final String INHERITED_INJECTED_VALUE_NODE = "Inherited values injected or updated using this context";
 
-	private static final String NO_VALUES_FOUND = "No values found";
-	private static final String UPDATED_IN_CLASS = "Updated in class :";
-	private static final String INJECTED_IN_FIELD = "Injected in field :";
-	private static final String INJECTED_IN_METHOD = "Injected in method :";
 
 	@Inject
 	private ImageRegistry imgReg;
@@ -126,7 +117,7 @@ public class BundleDataProvider extends ColumnLabelProvider
 		else if (b.getState() == Bundle.RESOLVED)
 			return "This bundle is Resolved";
 		
-		return "Tooltip text to be defined";
+		return "This bundle is in state : " + b.getState();
 
 	}
 
