@@ -38,7 +38,6 @@ public class BundleDataProvider extends ColumnLabelProvider
 
 	private static final Color COLOR_IF_FOUND = Display.getCurrent().getSystemColor(SWT.COLOR_BLUE);
 
-
 	@Inject
 	private ImageRegistry imgReg;
 
@@ -74,8 +73,9 @@ public class BundleDataProvider extends ColumnLabelProvider
 			return b.getSymbolicName();
 		case COL_VERSION:
 			return b.getVersion().toString();
-		case COL_STATE: return ""; // No text for state (see tooltip)
-		
+		case COL_STATE:
+			return ""; // No text for state (see tooltip)
+
 		}
 		return null;
 	}
@@ -111,12 +111,24 @@ public class BundleDataProvider extends ColumnLabelProvider
 	public String getToolTipText(Object element)
 	{
 		Bundle b = (Bundle) element;
-		
-		if (b.getState() == Bundle.ACTIVE)
+
+		switch (b.getState())
+		{
+		case Bundle.ACTIVE:
 			return "This bundle is Active";
-		else if (b.getState() == Bundle.RESOLVED)
+		case Bundle.INSTALLED:
+			return "This bundle is Installed";
+		case Bundle.RESOLVED:
 			return "This bundle is Resolved";
-		
+		case Bundle.STARTING:
+			return "This bundle is Starting";
+		case Bundle.STOPPING:
+			return "This bundle is Stopping";
+		case Bundle.UNINSTALLED:
+			return "This bundle is Uninstalled";
+
+		}
+
 		return "This bundle is in state : " + b.getState();
 
 	}
