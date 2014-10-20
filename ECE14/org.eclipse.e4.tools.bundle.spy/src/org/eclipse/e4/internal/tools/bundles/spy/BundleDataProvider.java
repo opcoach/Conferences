@@ -97,11 +97,23 @@ public class BundleDataProvider extends ColumnLabelProvider
 		Bundle b = (Bundle) element;
 		if (column == COL_STATE)
 		{
-			if (b.getState() == Bundle.ACTIVE)
-				return imgReg.get(BundleSpyPart.ICON_STATE_ACTIVE);
-			else if (b.getState() == Bundle.RESOLVED)
-				return imgReg.get(BundleSpyPart.ICON_STATE_RESOLVED);
 
+			switch (b.getState())
+			{
+			case Bundle.ACTIVE:
+				return imgReg.get(BundleSpyPart.ICON_STATE_ACTIVE);
+			case Bundle.INSTALLED:
+				return imgReg.get(BundleSpyPart.ICON_STATE_INSTALLED);
+			case Bundle.RESOLVED:
+				return imgReg.get(BundleSpyPart.ICON_STATE_RESOLVED);
+			case Bundle.STARTING:
+				return imgReg.get(BundleSpyPart.ICON_STATE_STARTING);
+			case Bundle.STOPPING:
+				return imgReg.get(BundleSpyPart.ICON_STATE_STOPPING);
+			case Bundle.UNINSTALLED:
+				return imgReg.get(BundleSpyPart.ICON_STATE_UNINSTALLED);
+
+			}
 		}
 		return null;
 

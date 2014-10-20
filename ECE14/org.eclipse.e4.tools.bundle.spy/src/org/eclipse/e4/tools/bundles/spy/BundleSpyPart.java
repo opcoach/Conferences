@@ -50,7 +50,11 @@ public class BundleSpyPart
 
 	private static final String ICON_REFRESH = "icons/refresh.gif";
 	public static final String ICON_STATE_ACTIVE = "icons/state_active.gif";
+	public static final String ICON_STATE_STARTING = "icons/state_starting.gif";
+	public static final String ICON_STATE_STOPPING = "icons/state_stopping.gif";
 	public static final String ICON_STATE_RESOLVED = "icons/state_resolved.gif";
+	public static final String ICON_STATE_INSTALLED = "icons/state_installed.gif";
+	public static final String ICON_STATE_UNINSTALLED = "icons/state_uninstalled.gif";
 
 	private TableViewer bundlesTableViewer;
 
@@ -202,6 +206,10 @@ public class BundleSpyPart
 		imgReg.put(ICON_REFRESH, ImageDescriptor.createFromURL(b.getEntry(ICON_REFRESH)));
 		imgReg.put(ICON_STATE_ACTIVE, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_ACTIVE)));
 		imgReg.put(ICON_STATE_RESOLVED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_RESOLVED)));
+		imgReg.put(ICON_STATE_STARTING, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_STARTING)));
+		imgReg.put(ICON_STATE_STOPPING, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_STOPPING)));
+		imgReg.put(ICON_STATE_INSTALLED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_INSTALLED)));
+		imgReg.put(ICON_STATE_UNINSTALLED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_UNINSTALLED)));
 
 		ctx.set(ImageRegistry.class, imgReg);
 
