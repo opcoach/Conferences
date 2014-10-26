@@ -4,12 +4,14 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.XYLayout;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -32,6 +34,9 @@ public class DashBoard
 	private GaugeFigure speedCounter;
 	private GaugeFigure rpmCounter;
 	private XYGraphMediaFactory gmfactory;
+	
+	private static final int COUNTER_SIZE = 200;
+	private static final int COUNTER_MARGIN = 15;
 
 	private Canvas canvas;
 
@@ -92,23 +97,28 @@ public class DashBoard
 
 		// Create a main figure to contain the 2 counters and the 2 labels
 		IFigure root = new Figure();
-		root.setLayoutManager(new GridLayout(2, false));
+		root.setLayoutManager(new XYLayout());
+		root.setBackgroundColor(ColorConstants.lightBlue);
 
 		rpmCounter = createRpmCounter();
+		rpmCounter.setBounds(new Rectangle(COUNTER_MARGIN,COUNTER_MARGIN,COUNTER_SIZE, COUNTER_SIZE));
 		root.add(rpmCounter);
 
 		speedCounter = createSpeedCounter();
+		speedCounter.setBounds(new Rectangle(COUNTER_MARGIN*2 + COUNTER_SIZE, COUNTER_MARGIN,COUNTER_SIZE, COUNTER_SIZE));
 		root.add(speedCounter);
 
 		// Add two titles under the counters.
 		Label rpmTitle = new Label();
-		rpmTitle.setText("                 Rpm");
+		rpmTitle.setText("Rpm");
 		rpmTitle.setLabelAlignment(PositionConstants.CENTER);
+		rpmTitle.setBounds(new Rectangle(COUNTER_MARGIN, COUNTER_SIZE + COUNTER_MARGIN,COUNTER_SIZE, 20));
 		root.add(rpmTitle);
 
 		Label speedTitle = new Label();
-		speedTitle.setText("                Speed");
+		speedTitle.setText("Speed");
 		speedTitle.setLabelAlignment(PositionConstants.CENTER);
+		speedTitle.setBounds(new Rectangle(COUNTER_SIZE + 2*COUNTER_MARGIN, COUNTER_SIZE + COUNTER_MARGIN,COUNTER_SIZE, 20));
 		root.add(speedTitle);
 
 		// Set the root figure.
@@ -151,6 +161,7 @@ public class DashBoard
 		rpmFigure.setMajorTickMarkStepHint(100);
 		rpmFigure.setEffect3D(true);
 		rpmFigure.setNeedleColor(gmfactory.getColor(50, 50, 255));
+
 		return rpmFigure;
 	}
 
