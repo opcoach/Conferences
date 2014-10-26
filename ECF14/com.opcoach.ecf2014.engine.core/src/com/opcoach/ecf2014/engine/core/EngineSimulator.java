@@ -41,6 +41,11 @@ public class EngineSimulator {
 			timer.scheduleAtFixedRate(new EngineTimerTask(), 1000, 1500);
 		}
 	}
+	
+	public boolean isStarted()
+	{
+		return timer != null;
+	}
 
 	public void stop() {
 		if (timer != null) {

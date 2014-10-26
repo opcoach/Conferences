@@ -1,0 +1,20 @@
+
+Button {
+  color: #FF00FF;
+  font-family: "Lucida Grande";
+  font-size: 15;
+  font-style: bold;
+}
+
+CTabFolder#com-opcoach-ecf14-eap-partstack-1 {
+   /* background-color: #FFFF00 #202020 100%; */
+    font-family: "Lucida Grande";
+    font-size: 15;
+}
+
+.MTrimmedWindow.topLevel {
+	margin-top:15px;
+	margin-bottom:15px;
+	background-color: #08F #000 100%
+	
+}

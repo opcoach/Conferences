@@ -16,14 +16,15 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.nebula.visualization.widgets.figures.GaugeFigure;
 import org.eclipse.nebula.visualization.xygraph.util.XYGraphMediaFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
-import com.opcoach.ecf2014.engine.core.EngineWatcher;
 import com.opcoach.ecf2014.engine.core.EngineSimulator;
+import com.opcoach.ecf2014.engine.core.EngineWatcher;
 
 public class DashBoard
 {
@@ -39,6 +40,9 @@ public class DashBoard
 	{
 		// We will use the application context to store and inject values.
 		IEclipseContext appliContext = appli.getContext();
+		
+		// We also need an ImageRegistry for the application
+		appliContext.set(ImageRegistry.class, new ImageRegistry());
 		
 		// Step 5 : create and start Engine.
 		EngineSimulator simu = ContextInjectionFactory.make(EngineSimulator.class, appliContext);
