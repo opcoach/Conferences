@@ -3,7 +3,6 @@ package com.opcoach.ecf2014.engine.core;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -12,12 +11,15 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 public class EngineSimulator {
 
 	// Define the constants to get/set values from context
-	public static final String ECF2014_SPEED_VALUE = "ecf2014.speedValue";
-	public static final String ECF2014_RPM_VALUE = "ecf2014.rpmValue";
-	public static final String ECF2014_TANK_VALUE = "ecf2014.tankValue";
+	public static final String ENGINE_SPEED_VALUE = "engine.speedValue";
+	public static final String ENGINE_RPM_VALUE = "engine.rpmValue";
+	public static final String ENGINE_TANK_VALUE = "engine.tankValue";
 
 	@Inject
 	IEclipseContext ctx; // The context where values will be injected
+
+	@Inject
+	private IEngineLogger logger;
 
 	// Physical values
 	int speed, rpm, tankLevel;
@@ -52,8 +54,8 @@ public class EngineSimulator {
 			timer.cancel();
 			speed = 0;
 			rpm = 0;
-			ctx.set(ECF2014_SPEED_VALUE, 0);
-			ctx.set(ECF2014_RPM_VALUE, 0);
+			ctx.set(ENGINE_SPEED_VALUE, 0);
+			ctx.set(ENGINE_RPM_VALUE, 0);
 
 		}
 		timer = null;
@@ -61,6 +63,7 @@ public class EngineSimulator {
 
 
 	private class EngineTimerTask extends TimerTask {
+	
 		@Override
 		public void run() {
 			speed = speed + acceleration;
@@ -71,9 +74,12 @@ public class EngineSimulator {
 			if (rpm < 0)
 				rpm = 0;
 
-			System.out.println("New value for speed : " + speed + " and rpm : "+ rpm);
-			ctx.set(ECF2014_SPEED_VALUE, speed);
-			ctx.set(ECF2014_RPM_VALUE, rpm);
+			if (logger != null)
+			logger.logMessage("New value for speed : " + speed + " and rpm : "+ rpm);
+			else
+				System.out.println("Logger is null");
+			ctx.set(ENGINE_SPEED_VALUE, speed);
+			ctx.set(ENGINE_RPM_VALUE, rpm);
 		}
 	}
 

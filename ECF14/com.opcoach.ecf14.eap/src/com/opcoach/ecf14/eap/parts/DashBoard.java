@@ -30,7 +30,6 @@ import com.opcoach.ecf2014.engine.core.EngineWatcher;
 
 public class DashBoard
 {
-
 	private GaugeFigure speedCounter;
 	private GaugeFigure rpmCounter;
 	private XYGraphMediaFactory gmfactory;
@@ -45,7 +44,7 @@ public class DashBoard
 	{
 		// We will use the application context to store and inject values.
 		IEclipseContext appliContext = appli.getContext();
-		
+				
 		// We also need an ImageRegistry for the application
 		appliContext.set(ImageRegistry.class, new ImageRegistry());
 		
@@ -59,7 +58,7 @@ public class DashBoard
 	}
 
 	@Inject @Optional
-	public void listenToRpmValue(final @Named(EngineSimulator.ECF2014_RPM_VALUE) int value, UISynchronize sync)
+	public void listenToRpmValue(final @Named(EngineSimulator.ENGINE_RPM_VALUE) int value, UISynchronize sync)
 	{
 		if (rpmCounter != null)
 			sync.asyncExec(new Runnable()
@@ -73,7 +72,7 @@ public class DashBoard
 
 	@Optional
 	@Inject
-	public void listenToSpeedValue(final @Named(EngineSimulator.ECF2014_SPEED_VALUE) int value, UISynchronize sync)
+	public void listenToSpeedValue(final @Named(EngineSimulator.ENGINE_SPEED_VALUE) int value, UISynchronize sync)
 	{
 		if (speedCounter != null)
 			sync.asyncExec(new Runnable()
@@ -140,6 +139,7 @@ public class DashBoard
 		gaugeFigure.setHiLevel(130);
 		gaugeFigure.setHihiLevel(180);
 		gaugeFigure.setMajorTickMarkStepHint(50);
+		gaugeFigure.setValue(60);
 		return gaugeFigure;
 	}
 
@@ -160,6 +160,7 @@ public class DashBoard
 		rpmFigure.setHihiLevel(5000);
 		rpmFigure.setMajorTickMarkStepHint(100);
 		rpmFigure.setEffect3D(true);
+		rpmFigure.setValue(2000);
 		rpmFigure.setNeedleColor(gmfactory.getColor(50, 50, 255));
 
 		return rpmFigure;

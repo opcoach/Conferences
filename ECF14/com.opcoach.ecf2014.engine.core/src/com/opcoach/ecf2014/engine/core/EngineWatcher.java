@@ -16,10 +16,12 @@ public class EngineWatcher
 	// Get the event broker by injection
 	@Inject
 	IEventBroker ebroker;
+	
+	@Inject IEngineLogger logger;
 
 	@Optional
 	@Inject
-	public void checkRpmValue(final @Named(EngineSimulator.ECF2014_RPM_VALUE) int value)
+	public void checkRpmValue(final @Named(EngineSimulator.ENGINE_RPM_VALUE) int value)
 	{
 		if (value > 5000)
 		{
@@ -31,9 +33,9 @@ public class EngineWatcher
 
 	@Optional
 	@Inject
-	public void checkSpeedValue(final @Named(EngineSimulator.ECF2014_SPEED_VALUE) int value)
+	public void checkSpeedValue(final @Named(EngineSimulator.ENGINE_SPEED_VALUE) int value)
 	{
-		System.out.println("Check speed value for alarm : " + value);
+		logger.logMessage("Check speed value for alarm : " + value);
 		if (value > 160)
 		{
 			// Send an alarm
