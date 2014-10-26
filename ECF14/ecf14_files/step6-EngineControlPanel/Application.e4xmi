@@ -5,7 +5,7 @@
       <children xsi:type="advanced:Perspective" xmi:id="_BXR0Zep4EeO1NKAyXur4AQ">
         <children xsi:type="basic:PartSashContainer" xmi:id="_BXR0Zup4EeO1NKAyXur4AQ">
           <children xsi:type="basic:PartStack" xmi:id="_BXR0Z-p4EeO1NKAyXur4AQ" containerData="65">
-            <children xsi:type="basic:Part" xmi:id="_BXR0aOp4EeO1NKAyXur4AQ" contributionURI="bundleclass://com.opcoach.ecf14.eap/com.opcoach.ecf14.eap.parts.DashBoard" label="Dashboard"/>
+            <children xsi:type="basic:Part" xmi:id="_BXR0aOp4EeO1NKAyXur4AQ" contributionURI="bundleclass://com.opcoach.ecf2014.engine.ui/com.opcoach.ecf2014.engine.ui.parts.DashBoard" label="Dashboard"/>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_RmMn4O_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partsashcontainer.0" containerData="35" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_TKpdMO_7EeOiC6RHfqkt7A" elementId="com.opcoach.ecf14.eap.partstack.0">

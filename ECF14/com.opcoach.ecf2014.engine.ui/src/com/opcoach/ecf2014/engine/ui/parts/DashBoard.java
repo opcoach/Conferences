@@ -1,4 +1,4 @@
-package com.opcoach.ecf14.eap.parts;
+package com.opcoach.ecf2014.engine.ui.parts;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
