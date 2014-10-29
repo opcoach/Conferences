@@ -8,10 +8,18 @@
             name="com.opcoach.ecf14.eap"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
-               name="applicationCSS"
-               value="platform:/plugin/com.opcoach.ecf14.eap/css/default.css">
+               name="cssTheme"
+               value="com.opcoach.ecf14.eap.theme1">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.e4.ui.css.swt.theme">
+      <theme
+            basestylesheeturi="css/default.css"
+            id="com.opcoach.ecf14.eap.theme1"
+            label="com.opcoach.ecf14.eap.theme1">
+      </theme>
    </extension>
 
 </plugin>
