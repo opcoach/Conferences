@@ -51,7 +51,6 @@ public class BundleDataProvider extends ColumnLabelProvider {
 	@Inject
 	public BundleDataProvider() {
 		super();
-		initializeImageRegistry();
 	}
 
 	@Override
@@ -147,14 +146,6 @@ public class BundleDataProvider extends ColumnLabelProvider {
 		return SWT.SHADOW_OUT;
 	}
 
-	private void initializeImageRegistry() {
-		if (imgReg != null)
-			return;
-
-		Bundle b = FrameworkUtil.getBundle(this.getClass());
-		imgReg = new ImageRegistry();
-
-	}
 
 	public void setColumn(int col) {
 		column = col;
