@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.e4.tools.bundles.spy;
 
+import java.util.Iterator;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -18,11 +20,15 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.internal.tools.bundles.spy.BundleDataFilter;
 import org.eclipse.e4.internal.tools.bundles.spy.BundleDataProvider;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -35,10 +41,12 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
 
 /**
@@ -55,6 +63,8 @@ public class BundleSpyPart
 	public static final String ICON_STATE_RESOLVED = "icons/state_resolved.gif";
 	public static final String ICON_STATE_INSTALLED = "icons/state_installed.gif";
 	public static final String ICON_STATE_UNINSTALLED = "icons/state_uninstalled.gif";
+	public static final String ICON_START = "icons/start.gif";
+	public static final String ICON_STOP = "icons/stop.gif";
 
 	private TableViewer bundlesTableViewer;
 
@@ -141,6 +151,66 @@ public class BundleSpyPart
 				}
 			});
 
+		startButton = new Button(comp, SWT.FLAT);
+		startButton.setImage(imgReg.get(ICON_START));
+		startButton.setToolTipText("Start the selected bundles not yet started");
+		startButton.setEnabled(false);
+		startButton.addSelectionListener(new SelectionAdapter()
+			{
+				@Override
+				public void widgetSelected(SelectionEvent e)
+				{
+					IStructuredSelection sel = (IStructuredSelection) bundlesTableViewer.getSelection();
+					Iterator<?> iter = sel.iterator();
+					while (iter.hasNext())
+					{
+						Bundle b = (Bundle) iter.next();
+						try
+						{
+							b.start();
+						} catch (BundleException e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+					bundlesTableViewer.refresh();
+					updateButtonStatuses(sel);
+				}
+			});
+
+		stopButton = new Button(comp, SWT.FLAT);
+		stopButton.setImage(imgReg.get(ICON_STOP));
+		stopButton.setToolTipText("Stop the selected bundles not yet stopped");
+		stopButton.setEnabled(false);
+		stopButton.addSelectionListener(new SelectionAdapter()
+			{
+				@Override
+				public void widgetSelected(SelectionEvent e)
+				{
+					if (MessageDialog.openConfirm(
+							((Control) e.getSource()).getShell(),
+							"Confirm Bundle Stop",
+							"Stopping a bundle may cause problems in your current application.\nUse this button only for your bundles under testing\n\nDo you confirm you want to stop the selected started bundle(s) ? "))
+					{
+						IStructuredSelection sel = (IStructuredSelection) bundlesTableViewer.getSelection();
+						Iterator<?> iter = sel.iterator();
+						while (iter.hasNext())
+						{
+							Bundle b = (Bundle) iter.next();
+							try
+							{
+								b.stop();
+							} catch (BundleException e1)
+							{
+								e1.printStackTrace();
+							}
+						}
+						bundlesTableViewer.refresh();
+						updateButtonStatuses(sel);
+					}
+				}
+			});
+
 		// Create the customer table with 2 columns: firstname and name
 		bundlesTableViewer = new TableViewer(parent);
 		final Table cTable = bundlesTableViewer.getTable();
@@ -162,7 +232,36 @@ public class BundleSpyPart
 		BundleContext bc = BundleSpyActivator.getContext();
 		bundlesTableViewer.setInput(bc.getBundles());
 
+		bundlesTableViewer.addSelectionChangedListener(new ISelectionChangedListener()
+			{
+				@Override
+				public void selectionChanged(SelectionChangedEvent event)
+				{
+					updateButtonStatuses((IStructuredSelection) event.getSelection());
+				}
+			});
+
 		ColumnViewerToolTipSupport.enableFor(bundlesTableViewer);
+
+	}
+
+	/** Update the stop and start buttons depending on current selection */
+	protected void updateButtonStatuses(IStructuredSelection selection)
+	{
+		// startButton is enabled if at least one bundle is not active
+		// stopButton is enabled if at least one bundle is active
+		boolean oneBundleIsActive = false;
+		boolean oneBundleIsNotActive = false;
+
+		Iterator<?> iter = selection.iterator();
+		while (iter.hasNext())
+		{
+			Bundle b = (Bundle) iter.next();
+			oneBundleIsActive = oneBundleIsActive || (b.getState() == Bundle.ACTIVE);
+			oneBundleIsNotActive = oneBundleIsNotActive || (b.getState() != Bundle.ACTIVE);
+		}
+		startButton.setEnabled(oneBundleIsNotActive);
+		stopButton.setEnabled(oneBundleIsActive);
 
 	}
 
@@ -179,6 +278,8 @@ public class BundleSpyPart
 	}
 
 	private static final ViewerFilter[] NO_FILTER = new ViewerFilter[0];
+	private Button stopButton;
+	private Button startButton;
 
 	/** Set the filter on table */
 	public void setFilter()
@@ -210,6 +311,8 @@ public class BundleSpyPart
 		imgReg.put(ICON_STATE_STOPPING, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_STOPPING)));
 		imgReg.put(ICON_STATE_INSTALLED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_INSTALLED)));
 		imgReg.put(ICON_STATE_UNINSTALLED, ImageDescriptor.createFromURL(b.getEntry(ICON_STATE_UNINSTALLED)));
+		imgReg.put(ICON_START, ImageDescriptor.createFromURL(b.getEntry(ICON_START)));
+		imgReg.put(ICON_STOP, ImageDescriptor.createFromURL(b.getEntry(ICON_STOP)));
 
 		ctx.set(ImageRegistry.class, imgReg);
 
