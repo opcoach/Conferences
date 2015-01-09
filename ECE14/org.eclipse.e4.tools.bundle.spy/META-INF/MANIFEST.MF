@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Spy
+Bundle-Name: Bundle Spy
 Bundle-SymbolicName: org.eclipse.e4.tools.bundle.spy;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.10.0",
  org.eclipse.jface;bundle-version="3.10.1",
