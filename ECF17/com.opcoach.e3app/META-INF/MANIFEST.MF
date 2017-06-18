@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: E3app
+Bundle-SymbolicName: com.opcoach.e3app;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: OPCOACH
+Require-Bundle: org.eclipse.core.runtime,
+  org.eclipse.ui,
+  org.eclipse.equinox.ds,
+  org.eclipse.equinox.util,
+  org.eclipse.equinox.event
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
