@@ -1,0 +1,42 @@
+target "E4EngineDemo" with source requirements
+
+location "http://download.eclipse.org/releases/photon" {
+// org.eclipse.rcp.feature.group
+	org.eclipse.platform.feature.group
+	org.eclipse.e4.rcp.feature.group
+	// org.eclipse.ui.workbench
+	org.eclipse.emf.databinding.feature.group
+	//org.eclipse.ui.cheatsheets
+	//org.eclipse.help.ui
+	//org.eclipse.compare
+	//org.eclipse.emf.common.feature.group
+	//org.eclipse.emf.ecore.feature.group
+	org.eclipse.jdt.junit.runtime
+	org.eclipse.pde.junit.runtime
+	org.eclipse.equinox.executable.feature.group
+
+	// Dependencies to launch swtbot tests 
+	/*org.eclipse.pde.junit.runtime
+	org.eclipse.jdt.junit4.runtime
+	org.eclipse.pde.core */
+}
+
+location "http://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/" {
+	org.eclipse.e4.tools.spies.feature.feature.group
+}
+
+location "https://dl.bintray.com/opcoach/e4Preferences" {
+	com.opcoach.e4.preferences.feature.feature.group
+}
+
+
+// Add delta pack
+
+location "http://download.eclipse.org/eclipse/updates/4.8" {
+	org.eclipse.equinox.sdk.feature.group
+}
+
+// Add nebula stuff
+location "http://download.eclipse.org/nebula/releases/latest" {
+	org.eclipse.nebula.feature.feature.group
+}

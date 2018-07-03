@@ -4,7 +4,7 @@ Bundle-Name: Core
 Bundle-SymbolicName: com.opcoach.ecf2014.engine.core
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: OPCOACH
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.core.services,
@@ -12,3 +12,4 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.e4.ui.model.workbench
 Export-Package: com.opcoach.ecf2014.engine.core
 Service-Component: component.xml
+Bundle-ActivationPolicy: lazy

@@ -20,4 +20,4 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  com.opcoach.ecf2014.engine.core;bundle-version="1.0.0",
  com.opcoach.ecf2014.engine.ui;bundle-version="1.0.0",
  org.eclipse.e4.ui.css.swt.theme
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
