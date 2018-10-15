@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -16,12 +17,14 @@ public class SampleView {
 	private Label myLabelInView;
 
 	@PostConstruct
-	public void createPartControl(Composite parent) {
+	public void createPartControl(Composite parent, EMenuService ms) {
 		System.out.println("Enter in SampleE4View postConstruct");
 
 		myLabelInView = new Label(parent, SWT.BORDER);
 		myLabelInView.setText("This is a sample E4 view");
 
+		// Make the popup menu 'com.opcoach.ece18.e3really.popupmenu' active
+		ms.registerContextMenu(myLabelInView, "com.opcoach.ece18.e3really.popupmenu");
 	}
 
 	@Focus

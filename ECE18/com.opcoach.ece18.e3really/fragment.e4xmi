@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+  <imports xsi:type="commands:Command" xmi:id="_hW1PkNC9Eei1DdKrVqWWUA" elementId="org.eclipse.ui.file.exit"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_EI7oACerEeWxCPrV0pAZQQ" featurename="descriptors" parentElementId="xpath:/">
     <elements xsi:type="basic:PartDescriptor" xmi:id="_KMklcCerEeWxCPrV0pAZQQ" elementId="test.partDescFragment.ASampleE4View" label="Sample View" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" tooltip="" category="Sample Category" contributionURI="bundleclass://com.opcoach.ece18.e3really/com.opcoach.ece18.e3really.parts.SampleView">
       <tags>View</tags>
       <tags>categoryTag:Sample Category</tags>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_gQvxQNC9Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.popupmenu">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_jlh7wNC9Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
+      </menus>
+      <menus xmi:id="_xmrs4NC-Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.menu.0">
+        <tags>ViewMenu</tags>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_yNhqcNC-Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
+      </menus>
     </elements>
   </fragments>
 </fragment:ModelFragments>
