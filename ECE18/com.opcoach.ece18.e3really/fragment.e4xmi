@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:basic_1="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
   <imports xsi:type="commands:Command" xmi:id="_hW1PkNC9Eei1DdKrVqWWUA" elementId="org.eclipse.ui.file.exit"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_EI7oACerEeWxCPrV0pAZQQ" featurename="descriptors" parentElementId="xpath:/">
     <elements xsi:type="basic:PartDescriptor" xmi:id="_KMklcCerEeWxCPrV0pAZQQ" elementId="test.partDescFragment.ASampleE4View" label="Sample View" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" tooltip="" category="Sample Category" contributionURI="bundleclass://com.opcoach.ece18.e3really/com.opcoach.ece18.e3really.parts.SampleView">
       <tags>View</tags>
       <tags>categoryTag:Sample Category</tags>
-      <menus xsi:type="menu:PopupMenu" xmi:id="_gQvxQNC9Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.popupmenu">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_jlh7wNC9Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_oTaRANGKEeiO-sxZkQUrHQ" elementId="com.opcoach.ece18.e3really.popupmenu">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_oTaRAdGKEeiO-sxZkQUrHQ" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
       </menus>
-      <menus xmi:id="_xmrs4NC-Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.menu.0">
+      <menus xmi:id="_p4VncNGKEeiO-sxZkQUrHQ" elementId="com.opcoach.ece18.e3really.viewmenu">
         <tags>ViewMenu</tags>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_yNhqcNC-Eei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_p4VncdGKEeiO-sxZkQUrHQ" elementId="com.opcoach.ece18.e3really.handledmenuitem.quitthisapplication" label="Quit this Application" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png" command="_hW1PkNC9Eei1DdKrVqWWUA"/>
       </menus>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_L8RrINDAEei1DdKrVqWWUA" featurename="snippets" parentElementId="xpath:/">
+    <elements xsi:type="advanced:Perspective" xmi:id="_O3iiYNDAEei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.perspective" label="E3Really" iconURI="platform:/plugin/com.opcoach.ece18.e3really/icons/Sample.png">
+      <children xsi:type="basic_1:PartSashContainer" xmi:id="_Sxa-ANDAEei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.partsashcontainer.0" horizontal="true">
+        <children xsi:type="basic_1:PartStack" xmi:id="_bOxA8NDEEei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.partstack.0">
+          <children xsi:type="advanced:Placeholder" xmi:id="_h1NCANGLEeiO-sxZkQUrHQ" elementId="org.eclipse.ui.navigator.ProjectExplorer"/>
+        </children>
+        <children xsi:type="basic_1:PartStack" xmi:id="_edcjcNDEEei1DdKrVqWWUA" elementId="com.opcoach.ece18.e3really.partstack.1">
+          <children xsi:type="advanced:Placeholder" xmi:id="_0dm9ANGKEeiO-sxZkQUrHQ" elementId="test.partDescFragment.ASampleE4View"/>
+        </children>
+      </children>
     </elements>
   </fragments>
 </fragment:ModelFragments>

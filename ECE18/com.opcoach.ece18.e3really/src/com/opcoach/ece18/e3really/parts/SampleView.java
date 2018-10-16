@@ -93,7 +93,7 @@ public class SampleView {
 	public void setSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selectedObjects) {
 
 		// Test if label exists (inject methods are called before PostConstruct)
-		if (myLabelInView != null)
+		if (myLabelInView != null && selectedObjects != null)
 			myLabelInView.setText("This is a multiple selection of " + selectedObjects.length + " objects");
 	}
 }
